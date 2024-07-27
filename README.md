@@ -1,4 +1,4 @@
-# Laravel v10+ Roles And Permissions Without Package 
+# Laravel v10x, v11x Roles And Permissions Without Package 
 
 ### Step 1: Download Fresh Laravel Laravel v10x, v11x
 
