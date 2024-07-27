@@ -104,7 +104,7 @@ return new class extends Migration
 ### Now time to create multiple pivot tables, We’ll create a new migration file for the table users_permissions. So run the below command to create
 
 ```bash
-php artisan make:migration create_roles_permissions_table
+php artisan make:migration create_users_permissions_table
 ```
 
 ```bash
@@ -143,7 +143,7 @@ return new class extends Migration
 ### Now let’s create a pivot table for users_roles.
 
 ```bash
- php artisan make:migration users_permissions
+ php artisan make:migration users_roles
 ```
 
 ```bash
