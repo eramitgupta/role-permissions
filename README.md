@@ -1,12 +1,12 @@
-# Laravel v10+ Roles And Permissions Without Package
+# Laravel v10+ Roles And Permissions Without Package 
 
-## Step 1: Download Fresh Laravel Laravel v10+
+### Step 1: Download Fresh Laravel Laravel v10x, v11x
 
 ```bash
  composer create-project laravel/laravel example-app
  ```
 
-## Step 2:  Create Auth
+### Step 2:  Create Auth
 
 ```bash
      composer require laravel/ui --dev
@@ -15,7 +15,7 @@
      npm run dev
 ```
 
-## Step 3: Connect Database
+### Step 3: Connect Database
 
 ```bash
      DB_CONNECTION=mysql
@@ -26,14 +26,14 @@
      DB_PASSWORD=password
 ```
 
-## Step 4: Make Model
+### Step 4: Make Model
 
 ```bash
      php artisan make:model Permission -m
      php artisan make:model Role -m
 ```
 
-## Now update the migrations file like:
+### Now update the migrations file like:
 ```bash
 <?php
 
@@ -66,7 +66,7 @@ return new class extends Migration
 
 ```
 
-## Migrations for permissions table:
+### Migrations for permissions table:
 
 ```bash
 <?php
@@ -101,7 +101,7 @@ return new class extends Migration
 ```
 
 
-## Now time to create multiple pivot tables, We’ll create a new migration file for the table users_permissions. So run the below command to create
+### Now time to create multiple pivot tables, We’ll create a new migration file for the table users_permissions. So run the below command to create
 
 ```bash
 php artisan make:migration create_roles_permissions_table
@@ -140,7 +140,7 @@ return new class extends Migration
 
 ```
 
-## Now let’s create a pivot table for users_roles.
+### Now let’s create a pivot table for users_roles.
 
 ```bash
  php artisan make:migration users_permissions
@@ -184,7 +184,7 @@ Under a particular role, the user may have specific permission. For example, a u
 php artisan make:migration create_roles_permissions_table --create=roles_permissions
 ```
 
-## Now update the roles_permissions like:
+### Now update the roles_permissions like:
 
 ```bash
 <?php
@@ -219,13 +219,13 @@ return new class extends Migration
 
 ```
 
-## Now run the following command to create a migration
+### Now run the following command to create a migration
 
 ```bash
 php artisan migrate
 ```
 
-## Step 5: Update Model With Relationship
+### Step 5: Update Model With Relationship
 Now update the Role model with a relationship like this:
 app\Models\Role.php
 
@@ -253,7 +253,7 @@ class Role extends Model
 }
 
 ```
-## Now update the Permission model with a relationship like this:
+### Now update the Permission model with a relationship like this:
 app\Models\Permission.php
 ```bash
 <?php
@@ -279,7 +279,7 @@ class Permission extends Model
 }
 
 ```
-## Step 6: Create  Service Trait
+### Step 6: Create  Service Trait
 Now in this step, we will create a service or helper trait to easily handle roles and permissions in the Laravel 10 application.
 App\Traits\HasPermissionsTrait.php
 
@@ -361,7 +361,7 @@ trait HasPermissionsTrait
 }
 ```
 
-## Now update the User model by using this trait.
+### Now update the User model by using this trait.
 app\Models\User.php
 ```bash
 <?php
@@ -401,7 +401,7 @@ class User extends Authenticatable
 ```
 
 
-## Step 7: Create Role Blade Directive
+### Step 7: Create Role Blade Directive
 Now this time we will create a @role() blade directive. So update the app service provider like this:
 App\Providers\AppServiceProvider.php
 
@@ -447,14 +447,14 @@ class AppServiceProvider extends ServiceProvider
 
 ```
 
-## Step 8: Create Seeder
+### Step 8: Create Seeder
 Now in this step, we will create some dummy data to create roles and permissions with users. So run the below command:
 ```bash
 php artisan make:seeder RoleSeeder
 
 ```
 
-## Now update it like this:
+### Now update it like this:
 Database\Seeders\RoleSeeder.php
 
 
@@ -518,7 +518,7 @@ class RoleSeeder extends Seeder
 
 ```
 
-## Now update the database seeder like this:
+### Now update the database seeder like this:
 DatabaseSeeder\DatabaseSeeder.php
 
 
@@ -540,20 +540,20 @@ class DatabaseSeeder extends Seeder
 
 ```
 
-## Now run the below command to generate some fake data to test our laravel 10 roles and permissions without package application.
+### Now run the below command to generate some fake data to test our laravel 10 roles and permissions without package application.
 
 ```bash
 php artisan db:seed
 
 ```
 
-## Step 9: Create Middleware
+### Step 9: Create Middleware
 In this step, we will create a role middleware so that we can handle user requests using middleware.
 ```bash
 php artisan make:middleware RoleMiddleware
 ```
 
-## And update it like this:
+### And update it like this:
 App\Http\Middleware\RoleMiddleware.php
 ```bash
 <?php
@@ -591,7 +591,7 @@ class RoleMiddleware
 ```
 
 
-## Now register it inside the kernel.php like this:
+### Now register it inside the kernel.php like this:
 App\Http\Kernel.php
 
 ```bash
@@ -601,7 +601,7 @@ App\Http\Kernel.php
 
  ```
 
-## Now all is set. We can check user requests and roles like this:
+### Now all is set. We can check user requests and roles like this:
      resources/views/home.blade.php
 ```bash
 @extends('layouts.app')
@@ -634,7 +634,7 @@ App\Http\Kernel.php
 
 ```
 
-## Check user roles and permissions in the controller:
+### Check user roles and permissions in the controller:
 
 
 ```bash
@@ -656,7 +656,7 @@ class TutorialController extends Controller
 
 ```
 
-## Use in your route like this:
+### Use in your route like this:
 routes/web.php
 
 ```bash
@@ -681,7 +681,7 @@ Route::get('/', TutorialController::class)->middleware('role:admin');
 
 ```
 
-## Use in a group route:
+### Use in a group route:
 
 
 ```bash
