@@ -550,11 +550,11 @@ php artisan db:seed
 ### Step 9: Create Middleware
 In this step, we will create a role middleware so that we can handle user requests using middleware.
 ```bash
-php artisan make:middleware RoleMiddleware
+php artisan make:middleware RolePermissionMiddleware
 ```
 
 ### And update it like this:
-App\Http\Middleware\RoleMiddleware.php
+App\Http\Middleware\RolePermissionMiddleware.php
 ```bash
 <?php
 
@@ -564,19 +564,15 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class RoleMiddleware
+class RolePermissionMiddleware
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(
-        Request $request,
-        Closure $next,
-        $role,
-        $permission = null
-    ): Response {
+    public function handle(Request $request, Closure $next, $role, $permission): Response
+    {
         if (!$request->user()->hasRole($role)) {
             abort(404);
         }
@@ -588,15 +584,23 @@ class RoleMiddleware
     }
 }
 
+
 ```
 
 
 ### Now register it inside the kernel.php like this:
-App\Http\Kernel.php
+bootstrap\app.php
+App\Http\Kernel.php 
 
+### v11x
+```bash
+ \App\Http\Middleware\RolePermissionMiddleware::class
+```
+
+### v10x 
 ```bash
  protected $middlewareAliases = [
-        'role' => \App\Http\Middleware\RoleMiddleware::class,
+        'role' =>  \App\Http\Middleware\RolePermissionMiddleware::class,
  ]
 
  ```
