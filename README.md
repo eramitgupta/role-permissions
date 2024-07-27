@@ -102,6 +102,11 @@ return new class extends Migration
 
 
 ## Now time to create multiple pivot tables, We’ll create a new migration file for the table users_permissions. So run the below command to create
+
+```bash
+php artisan make:migration create_roles_permissions_table
+```
+
 ```bash
 <?php
 
@@ -136,6 +141,10 @@ return new class extends Migration
 ```
 
 ## Now let’s create a pivot table for users_roles.
+
+```bash
+ php artisan make:migration users_permissions
+```
 
 ```bash
 <?php
@@ -309,7 +318,7 @@ trait HasPermissionsTrait
 
     public function hasPermissionTo($permission)
     {
-        return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
+        return $this->hasPermissionThroughRole($permission) && $this->hasPermission($permission);
     }
 
     public function hasPermissionThroughRole($permission)
@@ -350,7 +359,6 @@ trait HasPermissionsTrait
         return Permission::whereIn('name', $permissions)->get();
     }
 }
-
 ```
 
 ## Now update the User model by using this trait.
