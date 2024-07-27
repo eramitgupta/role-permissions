@@ -594,7 +594,12 @@ App\Http\Kernel.php
 
 ### v11x
 ```bash
- \App\Http\Middleware\RolePermissionMiddleware::class
+ ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias([
+           'role'=>  \App\Http\Middleware\RolePermissionMiddleware::class
+        ]);
+    })
+
 ```
 
 ### v10x 
