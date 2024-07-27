@@ -425,8 +425,8 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        try {
-            Permission::get()->map(function ($permission) {
+       try {
+            Permission::with('roles.users')->get()->each(function ($permission) {
                 Gate::define($permission->name, function ($user) use ($permission) {
                     return $user->hasPermissionTo($permission);
                 });
